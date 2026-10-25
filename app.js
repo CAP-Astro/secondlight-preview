@@ -135,6 +135,8 @@
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
     plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
     user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg>',
+    moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>',
+    sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>',
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
   };
 
@@ -155,7 +157,6 @@
   function art(kind, hue = 0, seed = 1) {
     const id = 'a' + (++artSeq);
     const r = rng(seed * 7 + 3);
-    const bg = 205 + Math.round(r() * 20);
     const h1 = (215 + hue) % 360, h2 = (195 + hue) % 360;
     const metal = `url(#${id}m)`;
     const objects = {
@@ -220,9 +221,9 @@
         <linearGradient id="${id}g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="hsl(${h1} 90% 70%)"/><stop offset="1" stop-color="hsl(${h2} 90% 40%)"/></linearGradient>
         <radialGradient id="${id}f" cx="35%" cy="35%" r="80%"><stop stop-color="hsl(${(hue + 340) % 360} 90% 65%)" stop-opacity=".95"/><stop offset=".6" stop-color="hsl(${(hue + 175) % 360} 80% 45%)" stop-opacity=".85"/><stop offset="1" stop-color="#0a0d1a"/></radialGradient>
       </defs>
-      <rect width="400" height="300" fill="hsl(${bg} 40% 94%)"/>
-      <rect y="214" width="400" height="86" fill="hsl(${bg} 32% 89%)"/>
-      <ellipse cx="200" cy="262" rx="150" ry="12" fill="#16233f" opacity=".07"/>
+      <rect width="400" height="300" style="fill:var(--art-bg)"/>
+      <rect y="214" width="400" height="86" style="fill:var(--art-floor)"/>
+      <ellipse cx="200" cy="262" rx="150" ry="12" style="fill:var(--art-shadow)"/>
       ${objects[kind] || objects.box}
     </svg>`;
   }
@@ -318,6 +319,17 @@
       <a href="#/pricing">How pricing works →</a></div></div>`;
   }
 
+  // ---------- Theme ----------
+  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (document.documentElement.dataset.theme || (darkQuery.matches ? 'dark' : 'light')) === 'dark';
+  function toggleTheme() {
+    const next = isDark() ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    store.set('theme', next);
+    renderNav();
+  }
+  darkQuery.addEventListener('change', () => renderNav());
+
   function renderNav() {
     const route = location.hash.split('?')[0];
     const user = state.user;
@@ -326,7 +338,8 @@
       <a class="link ${route.startsWith('#/browse') ? 'active' : ''}" href="#/browse">Browse</a>
       <a class="link ${route.startsWith('#/sell') ? 'active' : ''}" href="#/sell">Sell</a>
       <a class="link ${route.startsWith('#/pricing') ? 'active' : ''}" href="#/pricing">Pricing</a>
-      <a class="icon-btn" href="#/account?tab=watchlist" aria-label="Watchlist">${I.heart}</a>
+      <button class="icon-btn" data-theme-toggle aria-label="Switch to ${isDark() ? 'light' : 'dark'} mode" title="Switch to ${isDark() ? 'light' : 'dark'} mode">${isDark() ? I.sun : I.moon}</button>
+      <a class="icon-btn watch" href="#/account?tab=watchlist" aria-label="Watchlist">${I.heart}</a>
       <a class="icon-btn" href="${user ? '#/account?tab=messages' : '#/login?next=account'}" aria-label="Messages">${I.msg}${unread ? `<span class="badge">${unread}</span>` : ''}</a>
       ${user
         ? `<a href="#/account" class="avatar" title="${esc(user.name)}">${initials(user.name)}</a>`
@@ -1176,6 +1189,7 @@
 
   // ---------- Global events ----------
   document.addEventListener('click', e => {
+    if (e.target.closest('[data-theme-toggle]')) { toggleTheme(); return; }
     const fav = e.target.closest('[data-fav]');
     if (fav) {
       e.preventDefault(); e.stopPropagation();

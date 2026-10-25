@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
+  <script>try { var t = JSON.parse(localStorage.getItem("am:theme")); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
   <div class="ribbon"><b>UI mockup</b> — sample data only. No real accounts, charges or uploads leave your browser. For people living in Australia.</div>
@@ -18,10 +19,10 @@
       <div class="header-inner">
         <a href="#/" class="logo" aria-label="Second Light AU home">
           <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#c4d7ef"/>
-            <circle cx="15" cy="17" r="8" fill="#355f94"/>
-            <circle cx="18.5" cy="14" r="7" fill="#c4d7ef"/>
-            <circle cx="23.5" cy="8.5" r="1.6" fill="#355f94"/>
+            <rect class="tile" width="32" height="32" rx="8"/>
+            <circle class="moon" cx="15" cy="17" r="8"/>
+            <circle class="cut" cx="18.5" cy="14" r="7"/>
+            <circle class="star" cx="23.5" cy="8.5" r="1.6"/>
           </svg>
           <span>Second Light <em>AU</em></span>
         </a>
@@ -60,6 +61,6 @@
 
   <nav class="tabbar" id="tabbar" aria-label="Main"></nav>
   <div class="toast" id="toast"></div>
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>
