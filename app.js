@@ -34,6 +34,7 @@
     { id: 'filters', name: 'Filters', blurb: 'Narrowband, LRGB, dual-band', kind: 'filter' },
     { id: 'guiding', name: 'Guiding', blurb: 'Guide scopes, OAGs, cams', kind: 'guide' },
     { id: 'accessories', name: 'Accessories', blurb: 'Focusers, power, controllers', kind: 'box' },
+    { id: 'other', name: 'Other', blurb: 'Cases, dew control, books, software', kind: 'case' },
   ];
   const STATES = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'];
   const stateOf = l => (l.location || '').split(',').pop().trim();
@@ -147,6 +148,7 @@
     cameras: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="9"/><rect x="20" y="20" width="8" height="8" rx="1"/></svg>',
     filters: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="12" stroke-dasharray="2 3"/><path d="M15 19c5-4 13-4 18 0" /></svg>',
     guiding: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="24" cy="24" r="14"/><path d="M24 4v10M24 34v10M4 24h10M34 24h10"/><circle cx="24" cy="24" r="2" fill="currentColor"/></svg>',
+    other: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="24" r="3"/><circle cx="24" cy="24" r="3"/><circle cx="36" cy="24" r="3"/></svg>',
     accessories: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="14" width="32" height="22" rx="3"/><path d="M14 36v4M34 36v4M14 22h4M14 28h4"/><circle cx="31" cy="25" r="4"/></svg>',
   };
 
@@ -209,6 +211,11 @@
           ${Array.from({ length: 4 }, (_, i) => `<circle cx="${-78 + i * 34}" cy="30" r="11" fill="#1a1f35" stroke="#3a4470"/>`).join('')}
           <circle cx="86" cy="30" r="7" fill="hsl(${(hue + 130) % 360} 80% 55%)"/>
           <circle cx="86" cy="30" r="14" fill="hsl(${(hue + 130) % 360} 80% 55%)" opacity=".2"/></g>`,
+      case: `<g transform="translate(200 150)">
+          <rect x="-130" y="-70" width="260" height="140" rx="14" fill="#2b3150"/>
+          <rect x="-130" y="-6" width="260" height="8" fill="#1a1f35"/>
+          <rect x="-40" y="-92" width="80" height="26" rx="10" fill="none" stroke="#1a1f35" stroke-width="9"/>
+          <rect x="-104" y="-14" width="24" height="24" rx="4" fill="#8a93b8"/><rect x="80" y="-14" width="24" height="24" rx="4" fill="#8a93b8"/></g>`,
       smart: `<g transform="translate(200 150) rotate(-25)">
           <rect x="-70" y="-90" width="140" height="180" rx="40" fill="#d7dbe8"/>
           <rect x="-70" y="-90" width="140" height="40" rx="20" fill="#c33d4a"/>
@@ -240,6 +247,14 @@
 
   // ---------- Launch model: featured samples, founding sellers, fees ----------
   [2, 8, 13].forEach(id => { LISTINGS.find(l => l.id === id).featured = true; });
+  LISTINGS.push(
+    { id: 17, title: 'Foam-lined hard case for 80mm refractor + accessories', cat: 'other', brand: 'Generic', price: 85, cond: 'Good', location: 'Townsville, QLD', seller: 'pier_pete', rating: 4.9, sales: 15, posted: '3 days ago', kind: 'case', hue: 0,
+      specs: { 'Internal size': '62 x 30 x 22 cm', Foam: 'Pick-and-pluck', Wheels: 'No', Weight: '3.1 kg' },
+      desc: 'Waterproof hard case, foam already cut for an 80mm refractor, diagonal and two eyepieces. A few scuffs, latches and seal are perfect.' },
+    { id: 18, title: 'Inside PixInsight (2nd ed.) + The Deep-sky Imaging Primer', cat: 'other', brand: 'Springer', price: 70, was: 140, cond: 'Like new', location: 'Hobart, TAS', seller: 'southern_sky', rating: 5.0, sales: 4, posted: '1 day ago', kind: 'case', hue: 200,
+      specs: { Format: 'Paperback x 2', Condition: 'No markings', Postage: 'Parcel Post' },
+      desc: 'Two essential processing and imaging books. Read once, spotless.' },
+  );
   const FOUNDING_SELLERS = ['nebula_nick', 'darksky_dee', 'halpha_hana', 'southern_sky'];
   const isFounding = l => FOUNDING_SELLERS.includes(l.seller) || (l.mine && state.user && state.user.founding);
   const publicListings = () => allListings().filter(l => l.status !== 'review' && !state.sold.includes(l.id));
