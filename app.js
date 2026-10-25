@@ -405,7 +405,7 @@
     </section>
 
     <section class="section"><div class="container">
-      <div class="section-head"><h2>Shop by category</h2><a class="muted" href="#/browse">View all →</a></div>
+      <div class="section-head"><h2>Browse by category</h2><a class="muted" href="#/browse">View all →</a></div>
       <div class="cat-grid">
         ${CATS.map(c => `<a class="cat-card" href="#/browse?cat=${c.id}"><div class="ico">${CAT_ICONS[c.id]}</div><b>${c.name}</b><span>${c.blurb}</span></a>`).join('')}
       </div>
