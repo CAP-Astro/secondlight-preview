@@ -5,7 +5,7 @@
   const CURRENCY = 'A$';
   // Owner-adjustable fee rules (edited on the Owner admin screen). Launch mode makes listing free.
   const DEFAULT_FEES = {
-    launch: true, launchEnds: '2027-04-30', firstFree: true, foundingDiscount: 50, launchCredits: 2,
+    launch: true, launchEnds: '2027-06-30', firstFree: true, foundingDiscount: 50, launchCredits: 2,
     rate: 2, min: 2, cap: 40, featured: 7, spotlight: 15, bump: 2,
   };
 
