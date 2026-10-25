@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Light AU</title>
+  <meta name="description" content="Second Light AU — pre-loved astrophotography gear, bought and sold by Australian imagers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+  <div class="ribbon"><b>UI mockup</b> — sample data only. No real accounts, charges or uploads leave your browser. For people living in Australia.</div>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#/" class="logo" aria-label="Second Light AU home">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="#c4d7ef"/>
+            <circle cx="15" cy="17" r="8" fill="#355f94"/>
+            <circle cx="18.5" cy="14" r="7" fill="#c4d7ef"/>
+            <circle cx="23.5" cy="8.5" r="1.6" fill="#355f94"/>
+          </svg>
+          <span>Second Light <em>AU</em></span>
+        </a>
+        <form class="search" data-search>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-faint)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input name="q" placeholder="Search telescopes, cameras, mounts, filters…" autocomplete="off">
+          <select name="cat" aria-label="Category"><option value="">All gear</option></select>
+        </form>
+        <nav class="nav" id="nav"></nav>
+      </div>
+      <form class="search mobile-search" data-search>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-faint)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input name="q" placeholder="Search astro gear…" autocomplete="off">
+      </form>
+      <div style="height:10px" class="mobile-search-spacer"></div>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="margin-bottom:10px;font-size:20px"><span>Second Light <em>AU</em></span></div>
+          <p class="muted" style="max-width:340px;font-size:14px;margin:0">Pre-loved astro gear for Australian imagers. Astrophotography equipment only — every listing is reviewed.</p>
+          <p class="faint" style="font-size:13px;margin:12px 0 0">Buying is free. Sellers pay a small listing fee — no commission on sales.</p>
+        </div>
+        <div><h4>Marketplace</h4><ul><li><a href="#/browse">Browse all</a></li><li><a href="#/sell">Sell gear</a></li><li><a href="#/pricing">Pricing</a></li><li><a href="#/browse?cat=cameras">Cameras</a></li><li><a href="#/browse?cat=mounts">Mounts</a></li></ul></div>
+        <div><h4>Help</h4><ul><li>Safe trading tips</li><li>Seller guide</li><li>Shipping optics safely</li><li>Allowed items policy</li></ul></div>
+        <div><h4>Company</h4><ul><li>About</li><li>Contact</li><li>Terms</li><li>Privacy</li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Second Light AU · For Australian residents · All prices in AUD</span><span>Made for southern skies</span></div>
+    </div>
+  </footer>
+
+  <nav class="tabbar" id="tabbar" aria-label="Main"></nav>
+  <div class="toast" id="toast"></div>
+  <script src="app.js?v=8"></script>
+</body>
+</html>
